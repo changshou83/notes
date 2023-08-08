@@ -223,7 +223,59 @@ Angular 与 AngularJS 不同。
 
 数据绑定是在数据与UI之间创建连接的操作。
 
-看看各大MVVM库和框架是如何实现数据绑定的。
-- Knockout.js
-- Vue
-- Angular
+看看在各大MVVM库和框架中是如何使用数据绑定的。
+- `Knockout.js`
+  - 创建：`ko.observable(value)`(双向绑定)，直接在`ko.applyBindings()`里声明的是响应式变量
+  - 获取：`variable()`，在HTML元素上添加`data-bind`属性，值为`name1: variable1, name2: variable2`
+  - 修改：`variable(newValue)`
+  - 激活`knockout`：`ko.applyBindings({ variable: ko.observable(value) })`
+- `Vue`：
+  - 创建：在data函数中声明(Vue2)，`variable = ref(value), variable = reactive({ name: value })`(Vue3)
+  - 使用：`this.variable`(Vue2)，`variable.value`(Vue3)，在模板中使用v-bind命令绑定响应式变量，使用v-model绑定的是双向绑定
+  - 修改：对使用变量直接赋值
+- `Angular`：使用`@Component`装饰器，组件类中的变量都是响应式变量，模板中使用执行绑定指定响应式变量即可
+
+## 编译型框架的兴起
+
+- Svelte：Zero Virtual DOM，纯编译型框架，DSL，社区更繁荣
+- Solid：Zero Virtual DOM，纯编译型框架，JSX，社区待发展
+
+## SSR框架的兴起
+
+CSR对SEO不友好，所以出现一堆SSR和SSG框架。
+SSR提升了SEO和首屏渲染，但是增加了服务器成本。
+
+常见的Nextjs(React)，Nuxt(Vue)，SvelteKit(React)，Gatsby(React)，Astro，Qwik。
+
+未来将是两者结合。
+
+### 注水操作
+
+为SSR出来的HTML添加交互性。
+
+方法：
+1. 将监听器附加到DOM节点
+2. 构建框架内部组件的状态
+
+在SSR初次内容渲染出来与注水操作完成之间的时间，整个页面虽然看起来完整了，但是不具备交互性，也就是虽然首屏渲染提前了，但是TTI没有对应的优化。
+
+### 解决水合问题
+
+主要思路是：将我们的APP分解成块，让我们可以根据需要更智能的进行水合。
+
+现在的四种实现：
+1. 岛屿架构：本质是使用部分水合将应用程序划分为交互性孤岛。
+2. 部分水合：通过服务器分析哪些部分需要水合，不需要水合的组件只发送HTML，需要水合的组件则发送一个交互式UI组件。
+3. 渐进式水合：根据事件/交互逐步加载代码并水合页面，问题是APP的大部分在初始阶段就会被加载，因此无论如何都必须加载所有JS，因此不是很好的方案。
+4. RSC：在所有HTML和JS加载完毕前开始水合，优先考虑对需要交互的组件进行水合。
+
+实现岛屿架构的框架：
+1. Astro：SSG，框架无关
+2. Fresh：SSR，Deno，JSX，Preact
+
+可恢复性框架：Qwik
+主打一个极限的需要的代码才加载，其他SSR至少要把JS全量加载，这个连JS都是部分加载的。
+加载什么代码由QwikLoader决定，使用WebWorker实现。
+
+## 你需要一个框架吗
+
