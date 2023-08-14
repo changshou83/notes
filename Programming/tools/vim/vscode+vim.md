@@ -139,3 +139,49 @@
 删除双引号：`ds"`
 
 在两边添加标签：`yswtdiv`
+
+## vim 替代常用操作
+
+向下复制：`yyp`
+
+上移：`alt + ↑`
+
+缩进：`shift + >>`
+
+快速添加括号：`ysw(`
+
+搜索：`/{chars}`
+
+替换：`:%s/text/replace/g`，`:start,ends/text/replace/g`
+
+切换文件：`gt`，`alt + <number>`
+
+开一个新Tab：`ctrl + \ `
+
+切换Tab：`ctrl + <number>`
+
+切换到侧栏：`ctrl + 0`
+
+再切回来：`l`
+
+开关终端：`ctrl + j`
+
+开关侧栏：`ctrl + shift + b`(改键了)
+
+切换侧栏：`ctrl + shift + j/k`(改键了)
+
+开关代码块：`shift + {`
+
+查看函数签名：`gh`
+
+查看函数定义：`gd`，`ctrl + shift + l`(改键了)
+
+从函数定义退回来：`alt + ⬅`，`ctrl + shift + h`(改键了)
+
+快速退出插入模式：`jj`
+
+快速跳转：`<leader> <leader> w/b/j/k/s/f`
+
+快速打开文件：`ctrl + p`
+
+快速删除小括号内的字符：`dib`
