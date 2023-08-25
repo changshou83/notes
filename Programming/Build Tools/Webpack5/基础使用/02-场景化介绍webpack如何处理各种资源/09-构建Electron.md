@@ -1,0 +1,5 @@
+- 与 Web 页面不同，Electron 应用由一个 **主进程** 及若干 **渲染进程** 组成，进程之间以 IPC 方式通讯，其中：
+	- 主进程是一个 Node 程序，能够使用所有 Node 能力及 Electron 提供的 Native API，主要负责应用窗口的创建与销毁、事件注册分发、版本更新等；
+	- 渲染进程本质上是一个 Chromium 实例，负责加载我们编写的页面代码，渲染成 Electron 应用界面。
+- [示例](https://github.com/Tecvan-fe/webpack-book-samples/tree/main/8-3_electron-wp)
+- 调研rollup或者esbuild怎么打包electron

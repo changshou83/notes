@@ -1,0 +1,36 @@
+- 处理CSS资源
+	- 相关loader
+		- `css-loader`：让webpack理解css代码
+		- `style-loader`：开发时将css代码以style标签的形式注入到页面中
+		- `mini-css-extract-plugin`(webpack5.0+)/`extract-text-webpack-plugin`：生产时生成css文件并以link标签的形式注入到页面中
+	- 步骤
+		- 开发时
+			- 安装：`npm i -D css-loader style-loader`
+			- 配置webpack：`modules: { rules: [{ test: /\.css$/, use: ['style-loader', 'css-loader'] }] }`
+		- 生产时
+			- 安装：`npm i -D css-loader mini-css-extract-plugin html-webpack-plugin`
+			- 配置webpack
+				- 引入依赖
+					- `const MiniCssExtractPlugin = require('mini-css-extract-plugin');`
+					- `const HtmlWebpackPlugin = require('html-webpack-plugin');`
+				- `module: { rules: [{ test: /\.css$/, use: [(process.env.NODE_ENV === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader) , 'css-loader'] }] }`
+				- `plugins: [new MiniCssExtractPlugin(), new HtmlWebpackPlugin()]`
+		- 注意
+			- `mini-css-extract-plugin` 库同时提供 Loader、Plugin 组件，需要同时使用
+			- `mini-css-extract-plugin` 需要与 `html-webpack-plugin` 同时使用
+- 适用于处理器
+	- 安装依赖(以less为例)：`npm i -D less less-loader`
+	- 配置webpack：`module: { rules: [{ test: /\.less$/, use: ['style-loader','css-loader','less-loader'] }] }`
+- 使用post-css
+	- 步骤
+		- 安装依赖：`npm i -D postcss postcss-loader autoprefix`
+		- 配置webpack：`module: { rules: [{ test: /\.less$/, use: ['style-loader',{loader:'css-loader',options:{importLoaders:1}},'postcss-loader'] }] }`
+			- importLoaders字段：指定在css-loader之前有多少loader处理css模块，此处为一说明只有postcss-loader处理，默认为零。
+		- 配置postcss(`postcss.config.js`)：`module.exports = { plugins: [require('autoprefix')] }`
+	- 与预处理器配合使用
+		- webpack配置：`rules: [{ test: /\.less$/, use: ['style-loader',{loader:'css-loader',options:{importLoaders:1}},'postcss-loader','less-loader'] }]`
+	- 推荐插件
+		- `autoprefix`：自动加浏览器前缀
+		- `postcss-preset-env`：css语法降级
+		- `postcss-less`：兼容less语法，类似的还有`postcss-sass`和`poststylus`
+		- `stylelint`：css代码风格检查器

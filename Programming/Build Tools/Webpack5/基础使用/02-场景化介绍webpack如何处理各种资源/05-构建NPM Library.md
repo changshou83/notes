@@ -1,0 +1,11 @@
+- 与一般场景相比，构建 NPM 库时需要注意：
+	- 正确导出模块内容；
+	- 不要将第三方包打包进产物中，以免与业务方环境发生冲突；
+	- 将 CSS 抽离为独立文件，以方便用户自行决定实际用法；
+	- 始终生成 Sourcemap 文件，方便用户调试。
+- 开发时注意：
+	- 使用 `output.library` 配置项，正确导出模块内容；
+	- 使用 `externals` 配置项，忽略第三方库；
+	- 使用 `mini-css-extract-plugin` 单独打包 CSS 样式代码；
+	- 使用 `devtool` 配置项生成 Sourcemap 文件，推荐使用 `devtool = 'source-map'`。
+- 打包库推荐使用rollup或者esbuild

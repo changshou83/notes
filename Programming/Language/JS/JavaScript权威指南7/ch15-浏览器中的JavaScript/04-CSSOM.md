@@ -1,0 +1,23 @@
+
+- CSS类：`classList`,`className`
+- 行内样式
+	- `el.style.xxxXXX = value`
+	- 值必须是字符串类型，且要加单位
+- 计算样式：`el.getComputedStyle`
+	- 所有样式，包括行内及类
+	- 属性是只读的，不能修改
+	- 属性是绝对值，所有相对单位都被转换为绝对值，颜色值以`rgb()`格式返回
+	- 简写属性不会被计算，只有他们代表的基础属性会被计算
+- 操作样式表
+	- 禁用样式表：操作`id`属性和`disabled`属性
+	- 插入新样式表：创建`link`标签，插入`head`标签中
+- CSS动画与事件
+	- 通过操作类名触发动画
+	- 通过事件监控过渡动画
+		- 动画开始时，触发`transitionrun`
+		- 视觉上发生变化时，触发`transitionstart`
+		- 动画完成时，触发`transitionend`
+	- 通过事件监控动画
+		- 动画开始时，触发`animationstart`
+		- 动画完成时，触发`animationend`
+		- 重复时，触发`animationiteration`

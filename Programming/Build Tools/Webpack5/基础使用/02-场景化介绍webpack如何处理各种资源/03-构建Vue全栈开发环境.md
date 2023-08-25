@@ -1,0 +1,34 @@
+- 使用Vue-loader处理SFC
+	- 步骤
+		- 安装依赖：`npm i -D webpack webpack-cli vue-loader`
+		- 配置webpack
+			- 引入依赖：`const { VueLoaderPlugin } = require('vue-loader')`
+			- `module: { rules: [{ test: /\.vue$/, use: ['vue-loader'] }, { test: /\.css$/, use: ['style-loader','css-loader'] }] }`
+			- `plugins: [new VueLoaderPlugin()]`
+			- `resolve: { extensions: ['.vue','.js'] }`
+- 运行应用
+	- 自动生成HTML页面：`html-webpack-plugin`
+		- 安装依赖：`npm i -D html-webpack-plugin`
+		- 配置webpack
+			- 引入依赖：`const path = require('path');const HtmlWebpackPlugin = require('html-webpack-plugin');`
+			- `plugins: [.... , new HtmlWebpackPlugin()]`
+	- 运行页面，并进行热更新：`webpack-dev-server`
+		- 安装依赖：`npm i -D webpack-dev-server`
+		- 配置webpack：`module.export = { devServer: { hot: true, open: true }, ... }`
+- 复用其他编译工具
+- SSR
+	- 解决什么问题
+		- SEO不友好
+		- TTC太长
+	- 方案：打两个包(node服务端和客户端)
+	- 成熟方案
+		- Nuxtjs
+	- [示例](https://github.com/Tecvan-fe/webpack-book-samples/tree/main/5-2_use-ssr)
+- SSG
+	- 比SSR更静态的方案，消耗更小的服务器资源和更低的架构复杂度
+	- 使用场景
+		- 公司官网
+		- 营销活动页
+- Vue CLI
+	- Vue团队制作的专门针对Vue的webpack上层应用
+	- 使用`vue.config.js`更改默认webpack配置

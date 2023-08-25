@@ -1,0 +1,6 @@
+- 相关技术
+	- ServiceWorker：本地代理，通过拦截请求等功能实现应用的离线运行
+	- Manifest：描述应用信息的JSON文件，实现本地安装的功能
+- 相关webpack插件
+	- `workbox-webpack-plugin`：用于自动生成 `ServiceWorker` 代码
+	- `webpack-pwa-mainifest`：根据 Webpack 编译结果，自动生成 PWA Manifest 文件

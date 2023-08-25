@@ -1,0 +1,33 @@
+- 报文首部结构
+	- 请求行：包含方法，URI和HTTP协议版本
+	- 响应行：包含状态码，原因短语和HTTP协议版本
+	- 首部字段：包含表示请求和相应的各种条件和属性的各类首部
+	- 其他：可能包含HTTP的RFC里未定义的首部，比如Cookie等
+- 编码提升传输速率
+	- 实体：请求或响应的有效数据
+	- 内容编码
+		- 服务端对实体内容进行内容编码(压缩)，客户端进行解码
+		- 支持类型：`gzip`，`compress`，`deflate`，`identity`
+- 发送多种数据
+	- MIME
+		- 媒体类型，用来表示文档、文件或字节流的性质和格式
+		- 类型
+			- `text`：普通文本，例如：`text/plain`,`text/html`
+			- `image`：图像，例如：`image/webp`,`image/jpeg`
+			- `audio`：音频，例如：`audio/mpeg`,`audio/ogg`
+			- `video`：视频，例如：`video/webm`,`video/ogg`
+			- `application`：二进制数据，例如：`application/pdf`
+		- [常见类型](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
+	- Content-Type
+		- `multipart/form-data`：表单文件上传
+		- `multipart/byteranges`：状态码206(Partial Content)，响应报文包含了多个范围的内容时使用
+- 获取部分内容的范围请求
+	- `Accept-Range`
+	- `Range: bytes=start~end,start~end`
+- 内容协商
+	- 以语言，字符串，编码方式等为基准判断相应的资源
+	- 相关头部：`Accept`,`Accept-Charset`,`Accept-Encoding`,`Accept-Language`
+	- 相关技术
+		- 服务器驱动协商：服务器根据请求报文中的首部字段自动处理
+		- 代理驱动协商：用户可以从浏览器显示的可选项列表中手动选择，还可以利用Javascript脚本在Web页面上自动进行上述选择
+		- 透明协商：两者结合体，两者各自进行一次协商
